@@ -1,0 +1,1335 @@
+<mvc:View
+	controllerName="com.sap.userinfoapp.controller.HomePage"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:vm="sap.ui.comp.variants"
+	xmlns:tnt="sap.tnt"
+	height="100%">
+	<tnt:ToolPage id="app">
+		<tnt:header>
+			<tnt:ToolHeader>
+                <tnt:content>
+                    <Button id="sideNavigationToggleButton" icon="sap-icon://menu2" text="{i18n>MenuButton}" press="onSideNavButtonPress"></Button>
+                    	
+                    <ToolbarSpacer></ToolbarSpacer>
+                    <Label text="{i18n>mainLabel}" icon="sap-icon://fa-brands/apple" ></Label>
+                    <ToolbarSpacer></ToolbarSpacer>
+                    <!-- <Button text="{i18n>ProfileButton}" icon="sap-icon://customer" type="Transparent" press=".handleUserNamePress" ariaHasPopup="Menu">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button> -->
+                </tnt:content>
+            </tnt:ToolHeader>
+		</tnt:header>
+        <tnt:sideContent>
+
+        <tnt:SideNavigation id="sideNavigation"   itemSelect="onItemSelect" >
+		<tnt:NavigationList>
+			<tnt:NavigationListItem text="{i18n>CentralDataText}" icon="sap-icon://employee">
+				<tnt:NavigationListItem text="{i18n>UserInfoText}" key="UserInfo" ></tnt:NavigationListItem>
+                <tnt:NavigationListItem text="{i18n>UserAccessText}" key="UserAccess"></tnt:NavigationListItem>
+				<tnt:NavigationListItem text="{i18n>SectionText}" key="Section"></tnt:NavigationListItem>
+                <tnt:NavigationListItem text="{i18n>QuestionHeadText}" key="Qus_Head"></tnt:NavigationListItem>
+                <tnt:NavigationListItem text="{i18n>QuestionMapText}" key="Qus_Map"></tnt:NavigationListItem>
+                <tnt:NavigationListItem text="{i18n>QnTypePriorityText}" key="QnType_Priority"></tnt:NavigationListItem>
+			</tnt:NavigationListItem>
+			<tnt:NavigationListItem text="{i18n>Dropdown}" icon="sap-icon://building">
+				<tnt:NavigationListItem text="{i18n>StatusCodeEntityText}" key="StatusCode"></tnt:NavigationListItem>
+                    <tnt:NavigationListItem text="{i18n>listofSystemsText}" key="Systems"></tnt:NavigationListItem>
+                    <tnt:NavigationListItem text="{i18n>PhasesDetailsText}" key="Phases"></tnt:NavigationListItem>
+                    <tnt:NavigationListItem text="{i18n>CompanyDetailsText}" key="Company"></tnt:NavigationListItem>
+                    <tnt:NavigationListItem text="{i18n>IssueInfoText}" key="Issue"></tnt:NavigationListItem>
+                    <tnt:NavigationListItem text="{i18n>CategoryInfoText}" key="Category"></tnt:NavigationListItem>
+                    <tnt:NavigationListItem text="{i18n>AdminInfoText}" key="Admin"></tnt:NavigationListItem>
+			</tnt:NavigationListItem>
+		</tnt:NavigationList>
+	</tnt:SideNavigation>
+       
+		</tnt:sideContent>
+                
+            
+        <tnt:mainContents>
+            <!-- <App id="myPage"></App> -->
+            <NavContainer id="pageContainer" >
+				<pages>
+                    
+              <Page >
+            <customHeader>
+    <Bar >
+    <contentLeft>
+    <Title text="{TitleModel>/Name1}" visible="{VisibleModel>/UserInfo}" level="H1" />
+    <Title text="{TitleModel>/Name2}" visible="{VisibleModel>/UserAccess}" level="H1" />
+    <Title text="{TitleModel>/Name3}" visible="{VisibleModel>/Section}" level="H1" />
+    <Title text="{TitleModel>/Name4}" visible="{VisibleModel>/StatusCode}" level="H1" />
+    <Title text="{TitleModel>/Name5}" visible="{VisibleModel>/Systems}" level="H1" />
+    <Title text="{TitleModel>/Name6}" visible="{VisibleModel>/Phases}" level="H1" />
+    <Title text="{TitleModel>/Name7}" visible="{VisibleModel>/Company}" level="H1" />
+    <Title text="{TitleModel>/Name8}" visible="{VisibleModel>/Issue}" level="H1" />
+    <Title text="{TitleModel>/Name9}" visible="{VisibleModel>/Category}" level="H1" />
+    <Title text="{TitleModel>/Name10}" visible="{VisibleModel>/Admin}" level="H1" />
+    <Title text="{TitleModel>/Name11}" visible="{VisibleModel>/Qus_Head}" level="H1" />
+    <Title text="{TitleModel>/Name12}" visible="{VisibleModel>/Qus_Map}" level="H1" />
+    <Title text="{TitleModel>/Name13}" visible="{VisibleModel>/QnType_Priority}" level="H1" />
+    </contentLeft>
+    <contentRight>
+        <ToolbarSpacer />
+
+                                        <Button id="createButton" text="{i18n>CreateText}"   tooltip="Create" visible="true" press="onOpenAddDialog">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+                                        <Button id="deleteButton" text="{i18n>DeleteText}"   tooltip="Delete" visible="true" press="onDelete">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+                                        
+                                        <Button id="saveButton" text="{i18n>SaveText}" type="Emphasized" visible="false" enabled="true" press="onSave" />
+                                        <Button id="CancelButton" visible="false" text="Cancel" tooltip="Cancel" press="onCancel" />
+                                        <Button id="editModeButton" visible="true" text="Edit"  tooltip="Edit" press="onEditMode">
+                                            <layoutData>
+                                                <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                            </layoutData>
+                                        </Button>
+                                        <Button text="Import" id="importButton" visible="true" type="Emphasized" press="onImport" />
+
+    </contentRight>
+    </Bar>
+    </customHeader>
+
+
+            <content>
+                
+                <!-- Filter for UserInfo -->
+                <fb:FilterBar id="filterbar1" visible="{VisibleModel>/UserInfo}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+
+                        <!-- <fb:filterGroupItems>
+							<fb:FilterGroupItem visibleInFilterBar="true" name="SAP User ID" label="SAP User ID" >
+								<fb:control>
+									<SearchField id="searchField1" width="20%" placeholder="Search" liveChange=".onSearchUserID" />
+								</fb:control>				
+							</fb:FilterGroupItem>
+							
+							<fb:FilterGroupItem visibleInFilterBar="true" name="User Name" label="User Name" >
+								<fb:control>
+									<SearchField id="searchField2" width="20%" placeholder="Search" liveChange=".onSearchUser" />
+								</fb:control>				
+							</fb:FilterGroupItem>				
+							
+							<fb:FilterGroupItem visibleInFilterBar="true" name="Manager Name" label="Manager Name" >
+								<fb:control>
+									<SearchField id="searchField4" width="20%" placeholder="Search" liveChange=".onSearchManager" />
+								</fb:control>				
+							</fb:FilterGroupItem>			
+							
+							<fb:FilterGroupItem visibleInFilterBar="true" name="Company Name" label="Company Name" >
+								<fb:control>
+									<Select
+										id="slName1"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Company'
+                                                }">
+                        
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>   
+								</fb:control>				
+							</fb:FilterGroupItem>
+							
+						</fb:filterGroupItems>			
+	    			</fb:FilterBar>	 -->
+
+                            <fb:filterItems>
+                                 <fb:FilterItem name="SAP User ID" label="SAP User ID">
+                                    <fb:control>
+                                        <SearchField id="searchField1" width="20%" placeholder="Search" liveChange="onSearchUserID" />
+                                    </fb:control>               
+                                </fb:FilterItem>  
+
+                                <fb:FilterItem name="User Name" label="User Name">
+                                    <fb:control>
+                                        <SearchField id="searchField2" width="20%" placeholder="Search" liveChange=".onSearchUser" />
+                                    </fb:control>               
+                                </fb:FilterItem> 
+
+                            <fb:FilterItem name="Company Name" label="Company Name">
+                                    <fb:control>
+                                    <Select
+										id="slName1"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Company'
+                                                }">
+                        
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>   
+                                    </fb:control>               
+                                </fb:FilterItem>
+                                 <fb:FilterItem name="Manager Name" label="Manager Name">
+                                    <fb:control>
+                                        <SearchField id="searchField4" width="20%" placeholder="Search" liveChange=".onSearchManager" />
+                                    </fb:control>               
+                                </fb:FilterItem>
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for UserAccess -->
+                        <fb:FilterBar id="filterbar2" visible="{VisibleModel>/UserAccess}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                 <fb:FilterItem name="SAP User ID" label="SAP User ID">
+                                    <fb:control>
+                                        <SearchField id="searchField21" width="20%" placeholder="Search" liveChange=".onSearchUserID" />
+                                    </fb:control>               
+                                </fb:FilterItem>                             
+                                <fb:FilterItem name="Development System" label="Development System">
+                                    <fb:control>
+                                    <Select
+										id="slName2"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/DevSystems'
+                                                }">
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>   
+                                    </fb:control>               
+                                </fb:FilterItem>
+
+                            </fb:filterItems>
+                        </fb:FilterBar> 
+
+                        <!-- Filter for Section -->
+                        <fb:FilterBar id="filterbar3" visible="{VisibleModel>/Section}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                <fb:FilterItem name="Section Number" label="Section Number">
+                                    <fb:control>
+                                    <Select
+										id="slName3"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Section'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+        
+									</Select>   
+                                    </fb:control>               
+                                </fb:FilterItem>
+                                
+                            </fb:filterItems>
+                        </fb:FilterBar> 
+
+                        <!-- Filter for StatusCode -->
+                        <fb:FilterBar id="filterbar4" visible="{VisibleModel>/StatusCode}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                <fb:FilterItem name="Status Code" label="Status Code">
+                                    <fb:control>
+                                    <Select
+										id="slName4"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/StatusCode'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                        
+                                        
+									</Select>   
+                                    </fb:control>               
+                                </fb:FilterItem>
+                                
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for Systems -->
+                        <fb:FilterBar id="filterbar5" visible="{VisibleModel>/Systems}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                    
+                                <fb:FilterItem name="System ID" label="System ID">
+                                    <fb:control>
+                                    <Select
+										id="slName5"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/DevSystems'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                        
+                                        
+                                        
+									</Select>   
+                                      
+                                    </fb:control>               
+                                </fb:FilterItem>
+                                
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                         <!-- Filter for Phases -->
+                        <fb:FilterBar id="filterbar6" visible="{VisibleModel>/Phases}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                   
+                                <fb:FilterItem name="Phase" label="Phase">
+                                    <fb:control>
+                                    <Select
+										id="slName6"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Phases'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                       
+									</Select>   
+                                      
+                                    </fb:control>               
+                                </fb:FilterItem>
+                                
+                                
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                    
+                         <!-- Filter for Company -->
+                        <fb:FilterBar id="filterbar7" visible="{VisibleModel>/Company}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="CompanyName" label="Company Name">
+                                    <fb:control>
+                                    <Select
+										id="slName7"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Company'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem>    
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for Issue -->
+                        <fb:FilterBar id="filterbar8" visible="{VisibleModel>/Issue}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="Type of Issue" label="Type of Issue">
+                                    <fb:control>
+                                    <Select
+										id="slName8"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Issue'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                        
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem>    
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for Category -->
+                        <fb:FilterBar id="filterbar9" visible="{VisibleModel>/Category}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="Issue Category" label="Issue Category">
+                                    <fb:control>
+                                    <Select
+										id="slName9"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Category'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                    
+
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem>    
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                         <!-- Filter for Admin -->
+                        <fb:FilterBar id="filterbar10" visible="{VisibleModel>/Admin}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="Admin" label="Admin">
+                                    <fb:control>
+                                    <Select
+										id="slName10"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Admin'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                
+
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+
+                                   <fb:FilterItem name="CompanyName" label="Company Name">
+                                    <fb:control>
+                                    <Select
+										id="slName11"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Company'
+                                                }">
+                        
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                        
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem>    
+
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for Qus_Head -->
+                        <fb:FilterBar id="filterbar11" visible="{VisibleModel>/Qus_Head}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="QuestionNo" label="Question Number">
+                                    <fb:control>
+                                    <Select
+										id="slName101"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/QuestionNumber'
+                                                }">
+                        
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                        
+                                        
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+
+                                   <fb:FilterItem name="QuestionPriority" label="Question Priority">
+                                    <fb:control>
+                                    <Select
+										id="slName12"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                       items="{
+                                                    path: 'DataModel>/QuestionPriority'
+                                                }">
+                        
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for Qus_Map -->
+                        <fb:FilterBar id="filterbar12" visible="{VisibleModel>/Qus_Map}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="QuestionNo" label="Question Number">
+                                    <fb:control>
+                                    <Select
+										id="slName13"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/QuestionNumber'
+                                                }">
+                        
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+
+                                   <fb:FilterItem name="SectionNn" label="Section Number">
+                                    <fb:control>
+                                    <Select
+										id="slName14"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Section'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+                            </fb:filterItems>
+                        </fb:FilterBar>
+
+                        <!-- Filter for QnType_Priority -->
+                        <fb:FilterBar id="filterbar13" visible="{VisibleModel>/QnType_Priority}" reset="onReset" search="onSearch" useToolbar="false" showGoOnFB="false">
+    
+                            <fb:filterItems>
+                                                         
+                                <fb:FilterItem name="Type" label="Type">
+                                    <fb:control>
+                                    <Select
+										id="slName15"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Type'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                    
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+
+                                   <fb:FilterItem name="Priority" label="Question Priority">
+                                    <fb:control>
+                                    <Select
+										id="slName16"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/QuestionPriority'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+                                <fb:FilterItem name="Sectionno" label="Section Number">
+                                    <fb:control>
+                                    <Select
+										id="slName17"
+                                        forceSelection="true"
+										change="onSelectChange"
+                                        items="{
+                                                    path: 'DataModel>/Section'
+                                                }"
+                                        >
+                                        <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+									</Select>         
+                                    </fb:control>               
+                                </fb:FilterItem> 
+
+                            </fb:filterItems>
+                        </fb:FilterBar>
+          
+                <!-- Table for UserInfo --> 
+                <Table items="{mainModel>/UserInfo}" visible="{VisibleModel>/UserInfo}" id="table0" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                        
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="UserInfo" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox" />
+                                                    <Label text="User is Mandatory for CRC" required="true" />
+                                                    <Input id="idUserCRC" change="onNameChange" />
+                                                    <Label text="SAP User ID" required="true" />
+                                                    <Input id="idSAP"  />
+                                                    <Label text="User Name" />
+                                                    <Input id="idUser"  />
+                                                    <Label text="Email ID" />
+                                                    <Input id="idEmail"  />
+                                                    <Label text="Company Name" />
+                                                    <Input id="idCompany" />
+                                                    <Label text="Manager Name" />
+                                                    <Input id="idManager"  />
+                                                    <Label text="Admin Name" />
+                                                    <Input id="idAdminName"  />
+                                                    
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item0">
+                                    <cells>
+                                        <Text id="id1" text="{mainModel>UserIsMandatoryforCRC}"/>
+                                        <Text id="id2" text="{mainModel>SAPUserID}"/>
+                                        <Text id="id3" text="{mainModel>UserName}"/>
+                                        <Text id="id4" text="{mainModel>EmailID}"/>
+                                        <Text id="id5" text="{mainModel>CompanyName}"/>
+                                        <Text id="id6" text="{mainModel>ManagerName}"/> 
+                                        <Text id="idadmin" text="{mainModel>Admin}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="User is Mandatory for CRC" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="SAP User ID" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="UserName" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Email ID" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Company Name" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Manager Name" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Admin" />
+                                    </header>
+                                </Column>
+            
+                            </columns>
+                        </Table>
+
+                <!-- Table for UserAccess -->
+                <Table items="{mainModel>/UserAccess}" visible="{VisibleModel>/UserAccess}" id="table1" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                        
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="UserAccess" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate1" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate1" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox1" />
+                                                    <Label text="SAP User ID" required="true" />
+                                                    <Input id="idSAPUser" change="onNameChange" />
+                                                    <Label text="Dev System" required="true" />
+                                                    <Input id="idDev"  />
+                                                    <Label text="Developer Access" />
+                                                    <Select id="idDevAccess" forceSelection="true"
+                                                        items="{
+                                                    path: 'DataModel>/Access'
+                                                }">
+                                                <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                                    </Select>
+                                    
+                                                    <!-- <Input id="idDevAccess"  /> -->
+                                                    <Label text="L1 Reviewer Access" />
+                                                    <Select id="idL1Access" forceSelection="true"
+                                                        items="{
+                                                    path: 'DataModel>/Access'
+                                                }">
+                                                <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                                    </Select>
+                                                    <!-- <Input id="idL1Access"  /> -->
+                                                    <Label text="L2 Reviewer Access" />
+                                                    <!-- <Input id="idL2Access" /> -->
+                                                    <Select id="idL2Access" forceSelection="true"
+                                                        items="{
+                                                    path: 'DataModel>/Access'
+                                                }">
+                                                <core:Item key="{DataModel>key}" text="{DataModel>name}"/>
+                                                    </Select>
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item1">
+                                    <cells>
+                                        <Text id="id11" text="{mainModel>SAPUserID}"/>
+                                        <Text id="id22" text="{mainModel>SystemDev}"/>
+                                        <Text id="id33" text="{mainModel>DeveloperAccess}"/>
+                                        <Text id="id44" text="{mainModel>L1ReviewerAccess}"/>
+                                        <Text id="id55" text="{mainModel>L2ReviewerAccess}"/> 
+                                        <!-- <Button id="id7" icon="sap-icon://edit" onPress="onSelect" /> -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="SAP User ID" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Dev System" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Developer Access" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="L1 Reviewer Access" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="L2 Reviewer Access" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Section -->
+                        <Table items="{mainModel>/Section}" visible="{VisibleModel>/Section}" id="table2" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+
+
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="Section" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate2" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate2" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox2" />
+                                                    <Label text="SectionNo" />
+                                                    <Input id="idSectionNo" change="onNameChange" />
+                                                    <Label text="SectionName" />
+                                                    <Input id="idSectionName"  />
+                                                    <Label text="SectionPriority" />
+                                                    <Input id="idDSectionPriority"  />
+                                                    <Label text="Type" />
+                                                    <Input id="idType"  />
+                                                    <Label text="ObjectType" />
+                                                    <Input id="idObjectType" />
+                                                    
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item2">
+                                    <cells>
+                                        <Text id="id111" text="{mainModel>SectionNo}"/>
+                                        <Text id="id222" text="{mainModel>SectionName}"/>
+                                        <Text id="id333" text="{mainModel>SectionPriority}"/>
+                                        <Text id="id444" text="{mainModel>Type}"/>
+                                        <Text id="id555" text="{mainModel>ObjectType}"/> 
+                                        <!-- <Button id="id7" icon="sap-icon://edit" onPress="onSelect" /> -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Section Number" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Section Name" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Section Priority" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Type" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Type of Object" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for StatusCode -->
+                        <Table items="{mainModel>/StatusCode}" visible="{VisibleModel>/StatusCode}" id="table3" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="StatusCode" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate3" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate3" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox3" />
+                                                    <Label text="Status Code" />
+                                                    <Input id="idStatusCode" change="onNameChange" />
+                                                    <Label text="Status Text" />
+                                                    <Input id="idStatustext"  />
+                                                    <Label text="Status Type" />
+                                                    <Input id="idStatusType"  />
+                                                    <Label text="State" />
+                                                    <Input id="idState"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item3">
+                                    <cells>
+                                        <Text id="id1111" text="{mainModel>statuscode}"/>
+                                        <Text id="id2222" text="{mainModel>statustext}"/>
+                                        <Text id="id3333" text="{mainModel>statustype}"/>
+                                        <Text id="id4444" text="{mainModel>state}"/>
+                                        <!-- <Button id="id7" icon="sap-icon://edit" onPress="onSelect" /> -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Status Code" />
+                                    </header>
+                                </Column>
+
+                                <Column>
+                                    <header>
+                                        <Label text="Status Text" />
+                                    </header>
+                                </Column>
+
+                                <Column>
+                                    <header>
+                                        <Label text="Status Type" />
+                                    </header>
+                                </Column>
+
+                                <Column>
+                                    <header>
+                                        <Label text="State" />
+                                    </header>
+                                </Column>
+                            
+                
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Systems -->
+                        <Table items="{mainModel>/Systems}" visible="{VisibleModel>/Systems}" id="table4" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                       
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="Systems" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate4" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate4" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox4" />
+                                                    <Label text="System ID" />
+                                                    <Input id="idSystemID" change="onNameChange" />
+
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item4">
+                                    <cells>
+                                        <Text id="id11111" text="{mainModel>SystemID}"/>
+                        
+                                        <!-- <Button id="id7" icon="sap-icon://edit" onPress="onSelect" /> -->
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="System ID" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                         <!-- Table for Phases -->
+                        <Table items="{mainModel>/Phases}" visible="{VisibleModel>/Phases}" id="table5" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                       
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="Phases" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate5" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate5" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox5" />
+                                                    <Label text="Phase" />
+                                                    <Input id="idPhase" change="onNameChange" />
+                                                    <Label text="Description" />
+                                                    <Input id="idPhaseDescription"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item5">
+                                    <cells>
+                                        <Text id="id111111" text="{mainModel>Phase}"/>
+                                        <Text id="id222222" text="{mainModel>Description}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Phase" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Description" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                         <!-- Table for Company -->
+                        <Table items="{mainModel>/Company}" visible="{VisibleModel>/Company}" id="table6" mode="SingleSelectLeft" selectionChange="onSelect">
+                            <!-- <headerToolbar>
+                                <OverflowToolbar>
+                                    <content>
+                                    
+                                    </content> -->
+                                    <dependents>
+                                    <Dialog id="Company" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate6" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate6" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox6" />
+                                                    <Label text="CompanyName" />
+                                                    <Input id="idCompanyName" change="onNameChange" />
+                                                    <Label text="Description" />
+                                                    <Input id="idCompanyDescription"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    <!-- </OverflowToolbar>
+                            </headerToolbar> -->
+                            <items>
+                                <ColumnListItem type="Active" id="item6">
+                                    <cells>
+                                        <Text id="id1111111" text="{mainModel>CompanyName}"/>
+                                        <Text id="id2222222" text="{mainModel>Description}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="CompanyName" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Description" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Issue -->
+                        <Table items="{mainModel>/Issue}" visible="{VisibleModel>/Issue}" id="table7" mode="SingleSelectLeft" selectionChange="onSelect">
+                           
+                                   
+                                    <dependents>
+                                    <Dialog id="Issue" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate7" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate7" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox7" />
+                                                    <Label text="IssueType" />
+                                                    <Input id="idIssueType" change="onNameChange" />
+                                                    <Label text="Description" />
+                                                    <Input id="idIssueTypeDescription"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                            <items>
+                                <ColumnListItem type="Active" id="item7">
+                                    <cells>
+                                        <Text id="id11111111" text="{mainModel>IssueType}"/>
+                                        <Text id="id22222222" text="{mainModel>Description}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="IssueType" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Description" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Category -->
+                        <Table items="{mainModel>/Category}" visible="{VisibleModel>/Category}" id="table8" mode="SingleSelectLeft" selectionChange="onSelect">
+                           
+                                    <dependents>
+                                    <Dialog id="Category" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate8" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate8" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox8" />
+                                                    <Label text="IssueCategory" />
+                                                    <Input id="idIssueCategory" change="onNameChange" />
+                                                    <Label text="Description" />
+                                                    <Input id="idIssueCategoryDescription"  />
+                                
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                   
+                            <items>
+                                <ColumnListItem type="Active" id="item8">
+                                    <cells>
+                                        <Text id="id111111111" text="{mainModel>IssueCategory}"/>
+                                        <Text id="id222222222" text="{mainModel>Description}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="IssueCategory" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Description" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Admin -->
+                        <Table items="{mainModel>/Admin}" visible="{VisibleModel>/Admin}" id="table9" mode="SingleSelectLeft" selectionChange="onSelect">
+                           
+                                    <dependents>
+                                    <Dialog id="Admin" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate9" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate9" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox9" />
+                                                    <Label text="Admin UserId" />
+                                                    <Input id="idAdminUserId" change="onNameChange" />
+                                                    <Label text="Admin Name" />
+                                                    <Input id="idAdminNames"  />
+                                                    <Label text="CompanyName" />
+                                                    <Input id="idCompanyNameAdmin"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                            <items>
+                                <ColumnListItem type="Active" id="item9">
+                                    <cells>
+                                        <Text id="id1111111111" text="{mainModel>AdminUserId}"/>
+                                        <Text id="id2222222222" text="{mainModel>AdminName}"/>
+                                        <Text id="id3333333333" text="{mainModel>CompanyName}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Admin User ID" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Admin Name" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Company Name" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Qus_Head -->
+                        <Table items="{mainModel>/Qus_Head}" visible="{VisibleModel>/Qus_Head}" id="table10" mode="SingleSelectLeft" selectionChange="onSelect">
+                            
+                                    <dependents>
+                                    <Dialog id="Qus_Head" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate10" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate10" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox10" />
+                                                    <Label text="QuestionNo" />
+                                                    <Input id="idHeadQuestionNo" change="onNameChange" />
+                                                    <Label text="Question" />
+                                                    <Input id="idHeadQuestion"  />
+                                                    <Label text="Question Priority" />
+                                                    <Input id="idHeadQuestionPriority"  />
+                                    
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    
+                            <items>
+                                <ColumnListItem type="Active" id="item10">
+                                    <cells>
+                                        <Text id="idQuestionNo2" text="{mainModel>QuestionNo}"/>
+                                        <Text id="idQuestion" text="{mainModel>Question}"/>
+                                        <Text id="idQuestionPriority" text="{mainModel>QuestionPriority}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Question Number" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Question" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Question Priority" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for Qus_Map -->
+                        <Table items="{mainModel>/Qus_Map}" visible="{VisibleModel>/Qus_Map}" id="table11" mode="SingleSelectLeft" selectionChange="onSelect">
+                            
+                                    <dependents>
+                                    <Dialog id="Qus_Map" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate11" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate11" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox11" />
+                                                    <Label text="QuestionNo" />
+                                                    <Input id="idQuestionNo1" change="onNameChange" />
+                                                    <Label text="SectionNn" />
+                                                    <Input id="idSectionNn1"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    
+                            <items>
+                                <ColumnListItem type="Active" id="item11">
+                                    <cells>
+                                        <Text id="idQuestionNo" text="{mainModel>QuestionNo}"/>
+                                        <Text id="idSectionNn" text="{mainModel>SectionNn}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Question Number" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Section Number" />
+                                    </header>
+                                </Column>
+                            </columns>
+                        </Table>
+
+                        <!-- Table for QnType_Priority -->
+                        <Table items="{mainModel>/QnType_Priority}" visible="{VisibleModel>/QnType_Priority}" id="table12" mode="SingleSelectLeft" selectionChange="onSelect">
+                            
+                                    <dependents>
+                                    <Dialog id="QnType_Priority" title="Create a Record">
+                                            <buttons>
+                                                <Button id="confirmCreate12" text="Create" press=".onCreate" type="Emphasized" /> 
+                                                <Button id="cancelCreate12" text="Cancel" press="onCancelDialog" type="Transparent" />
+                                            </buttons>
+                                             
+                                            <form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+                                                <form:content>
+                                                    <CheckBox text="Create multiple records" id="checkbox12" />
+                                                    <Label text="Type" />
+                                                    <Input id="idType1" change="onNameChange" />
+                                                    <Label text="Priority" />
+                                                    <Input id="idPriority1"  />
+                                                    <Label text="Sectionno" />
+                                                    <Input id="idSectionno1"  />
+                                                </form:content>
+                                            </form:SimpleForm>
+                                           
+                                        </Dialog>
+                                    </dependents>
+                                    
+                            <items>
+                                <ColumnListItem type="Active" id="item12">
+                                    <cells>
+                                        <Text id="idType2" text="{mainModel>Type}"/>
+                                        <Text id="idPriority" text="{mainModel>Priority}"/>
+                                        <Text id="idSection" text="{mainModel>Sectionno}"/>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                            <columns>
+                                <Column>
+                                    <header>
+                                        <Label text="Type" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Priority" />
+                                    </header>
+                                </Column>
+                                <Column>
+                                    <header>
+                                        <Label text="Section Number" />
+                                    </header>
+                                </Column>
+                            </columns>
+
+                        </Table>
+                        
+            </content>
+
+                    </Page>
+			
+                </pages>
+            </NavContainer>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>

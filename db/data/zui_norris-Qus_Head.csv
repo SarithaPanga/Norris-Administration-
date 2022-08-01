@@ -1,0 +1,8 @@
+QuestionNo,Question,QuestionPriority
+10,"Is ABAP Unit test written for the relevant objects? If not,why?",1
+20,"Is ABAP unit test coverage GE 80%? if not,why?",2
+30,Is Apple Inclusive Language used,1
+40,Report 1,1
+50,Report 2,1
+60,Object Specific 1,1
+70,Object Specific 1,1

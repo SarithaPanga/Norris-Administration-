@@ -1,0 +1,176 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "com.sap.userinfoapp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap-ux/fiori-freestyle-writer:basic",
+            "version": "0.11.15",
+            "toolsId": "64610535-444d-4af1-aa7c-c03f51d5dd3a"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/CatalogService/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            },
+            "visible": {
+                "uri": "model/Entity_Visibilty.json",
+                "type": "JSON"
+            },
+            "ViewTitle": {
+                "uri": "model/ViewTitle.json",
+                "type": "JSON"
+            },
+            "Sample": {
+                "uri": "model/data.json",
+                "type": "JSON"
+            },
+            "Table": {
+                "uri": "model/TableID.json",
+                "type": "JSON"
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "com-sap-userinfoapp-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "norrisapp",
+                    "action": "manage",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.sap.userinfoapp.i18n.i18n"
+                }
+            },
+            "mainModel": {
+                "type": "sap.ui.model.odata.v4.ODataModel",
+                
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true,
+                    "groupId": "$auto"
+                }
+            },
+            "VisibleModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "visible"
+            },
+            "TitleModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "ViewTitle"
+            },
+            "DataModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "Sample"
+            },
+            "TableModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "Table"
+            }
+
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.sap.userinfoapp.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                
+                {
+                    "pattern": ":?query:",
+                    "name": "TargetHomePage",
+                    "target": "TargetHomePage"
+                }
+            ],
+            "targets": {
+                "TargetHomePage": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "HomePage",
+                    "viewName": "HomePage"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "com.sap.userinfoapp.view.HomePage",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        }
+    }
+}

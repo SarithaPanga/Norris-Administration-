@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="UserInfo" EntityType="CatalogService.UserInfo"/>
+            </EntityContainer>
+            <EntityType Name="UserInfo">
+                <Key>
+                    <PropertyRef Name="UserIsMandatoryforCRC"/>
+                    <PropertyRef Name="SAPUserID"/>
+                </Key>
+                <Property Name="UserIsMandatoryforCRC" Type="Edm.String" Nullable="false"/>
+                <Property Name="SAPUserID" Type="Edm.String" Nullable="false"/>
+                <Property Name="UserName" Type="Edm.String"/>
+                <Property Name="EmailID" Type="Edm.String"/>
+                <Property Name="CompanyName" Type="Edm.String"/>
+                <Property Name="ManagerName" Type="Edm.String"/>
+                <Property Name="Admin" Type="Edm.String"/>
+            </EntityType>
+            <Annotations Target="CatalogService.UserInfo/UserIsMandatoryforCRC">
+                <Annotation Term="Common.Label" String="User is Mandatory for CRC"/>
+            </Annotations>
+            <Annotations Target="CatalogService.UserInfo/SAPUserID">
+                <Annotation Term="Common.Label" String="SAP User ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.UserInfo/UserName">
+                <Annotation Term="Common.Label" String="User Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.UserInfo/EmailID">
+                <Annotation Term="Common.Label" String="Email ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.UserInfo/CompanyName">
+                <Annotation Term="Common.Label" String="Company Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.UserInfo/ManagerName">
+                <Annotation Term="Common.Label" String="Manager Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.UserInfo/Admin">
+                <Annotation Term="Common.Label" String="Admin"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,15 @@
+{
+    "UserInfo": "table0",
+    "UserAccess": "table1",
+    "Section" : "table2",
+    "StatusCode" : "table3",
+    "Systems" : "table4",
+    "Phases" : "table5",
+    "Company" : "table6",
+    "Issue" : "table7",
+    "Category" : "table8",
+    "Admin" : "table9",
+    "Qus_Head" : "table10",
+    "Qus_Map" : "table11",
+    "QnType_Priority" : "table12"
+}

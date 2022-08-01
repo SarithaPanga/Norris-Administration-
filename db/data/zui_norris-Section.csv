@@ -1,0 +1,6 @@
+SectionNo,SectionName,SectionPriority,Type,ObjectType
+10,ABAP Unit tests,1,General,
+20,Process Steps,2,General,
+30,Rev-Track(RTR)/TR/ZCBD,3,General,
+40,Class Question,2,Object,Class
+50,Report Questions,1,Object,Report

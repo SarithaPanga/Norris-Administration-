@@ -1,0 +1,7 @@
+SAPUserID,SystemDev,DeveloperAccess,L1ReviewerAccess,L2ReviewerAccess
+2000000001,DV2,true,true,true
+2000000002,DV2,true,true,false
+2000000003,DV2,true,false,true
+2000000004,DV2,true,false,false
+2000000005,DV2,false,true,false
+2000000006,DV2,false,false,true

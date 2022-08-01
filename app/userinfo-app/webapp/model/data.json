@@ -1,0 +1,298 @@
+{
+    "Company" : [
+        {
+            "key" : "",
+            "name" : "All"
+          },
+    {
+      "key" : "Apple",
+      "name" : "Apple"
+    },
+    {
+      "key" : "Wipro",
+      "name" : "Wipro"
+    },
+    {
+      "key" : "TCS",
+      "name" : "TCS"
+    },
+    {
+      "key" : "Infosys",
+      "name" : "Infosys"
+    },
+    {
+      "key" : "IBM",
+      "name" : "IBM"
+    },
+    {
+      "key" : "Accenture",
+      "name" : "Accenture"
+    }
+  ],
+  "DevSystems" : [
+    {
+        "key" : "",
+        "name" : "All"
+      },
+      {
+        "key" : "DV1",
+        "name" : "DV1"
+      },
+      {
+        "key" : "DV2",
+        "name" : "DV2"
+      },
+      {
+        "key" : "DV3",
+        "name" : "DV3"
+      },
+      {
+        "key" : "DV4",
+        "name" : "DV4"
+      },
+      {
+        "key" : "DV5",
+        "name" : "DV5"
+      },
+      {
+        "key" : "DV6",
+        "name" : "DV6"
+      }
+
+  ],
+  "Section" : [
+    {
+        "key" : "",
+        "name" : "All"
+      },
+      {
+        "key" : "10",
+        "name" : "10"
+      },
+      {
+        "key" : "20",
+        "name" : "20"
+      },
+      {
+        "key" : "30",
+        "name" : "30"
+      },
+      {
+        "key" : "40",
+        "name" : "40"
+      },
+      {
+        "key" : "50",
+        "name" : "50"
+      }
+
+  ],
+  "StatusCode" : [
+
+    {
+        "key" : "",
+        "name" : "All"
+      },
+      {
+        "key" : "10",
+        "name" : "10"
+      },
+      {
+        "key" : "20",
+        "name" : "20"
+      },
+      {
+        "key" : "30",
+        "name" : "30"
+      },
+      {
+        "key" : "40",
+        "name" : "40"
+      },
+      {
+        "key" : "50",
+        "name" : "50"
+      },
+      {
+        "key" : "60",
+        "name" : "60"
+      },
+      {
+        "key" : "70",
+        "name" : "70"
+      },
+      {
+        "key" : "80",
+        "name" : "80"
+      },
+      {
+        "key" : "90",
+        "name" : "90"
+      },
+      {
+        "key" : "100",
+        "name" : "100"
+      }
+
+  ],
+  "Phases" : [
+
+    {
+        "key" : "",
+        "name" : "All"
+      },
+      {
+        "key" : "Development",
+        "name" : "Development"
+      },
+      {
+        "key" : "Integration testing",
+        "name" : "Integration testing"
+      },
+      {
+        "key" : "User Acceptance testing",
+        "name" : "User Acceptance testing"
+      }
+
+  ],
+  "Issue" : [
+    {
+        "key" : "",
+        "name" : "All"
+    },
+    {
+        "key" : "Soft Configuration",
+        "name" : "Soft Configuration"
+    },
+    {
+        "key" : "Custom Code changes",
+        "name" : "Custom Code changes"
+    }
+    ],
+    "Category" : [
+        {
+            "key" : "",
+            "name" : "All"
+        },
+        {
+            "key" : "Incident",
+            "name" : "Incident"
+        },
+        {
+            "key" : "Jira",
+            "name" : "Jira"
+        },
+        {
+            "key" : "Radar",
+            "name" : "Radar"
+        },
+        {
+            "key" : "CST",
+            "name" : "CST"
+        },
+        {
+            "key" : "New Development",
+            "name" : "New Development"
+        },
+        {
+            "key" : "Enhancement",
+            "name" : "Enhancement"
+        }
+
+        ],
+        "Admin" : [
+        {
+            "key" : "",
+            "name" : "All"
+        },
+        {
+            "key" : "",
+            "name" : "Admin 1"
+        },
+        {
+            "key" : "",
+            "name" : "Admin 2"
+        }
+    ],
+    "QuestionNumber" : [
+
+        {
+            "key" : "",
+            "name" : "All"
+          },
+          {
+            "key" : "10",
+            "name" : "10"
+          },
+          {
+            "key" : "20",
+            "name" : "20"
+          },
+          {
+            "key" : "30",
+            "name" : "30"
+          },
+          {
+            "key" : "40",
+            "name" : "40"
+          },
+          {
+            "key" : "50",
+            "name" : "50"
+          },
+          {
+            "key" : "60",
+            "name" : "60"
+          },
+          {
+            "key" : "70",
+            "name" : "70"
+          }
+    ],
+    "QuestionPriority" : [
+
+        {
+            "key" : "",
+            "name" : "All"
+          },
+          {
+            "key" : "1",
+            "name" : "1"
+          },
+          {
+            "key" : "2",
+            "name" : "2"
+          }
+        ],
+       
+        "Type" : [
+
+            {
+             "key" : "",
+                    "name" : "All"
+                  },
+                  {
+                    "key" : "Report",
+                    "name" : "Report"
+                  },
+                  {
+                    "key" : "Class",
+                    "name" : "Class"
+                  }
+                ],
+                "Access" : [
+                    {
+                        "key" : "",
+                        "name" : "Select"
+                      },
+                   
+                          {
+                            "key" : "Yes",
+                            "name" : "Yes"
+                          },
+                          {
+                            "key" : "No",
+                            "name" : "No"
+                          }
+                        ]
+}

@@ -1,0 +1,11 @@
+statuscode,statustext,statustype,state
+10,New,Open,None
+20,Dev in progress,Open,Information
+30,Submitted for L1,InReview,Warning
+40,L1 Review in progress,InReview,Warning
+50,For Developer action after L1,Open,Error
+60,Submitted for L2,InReview,Warning
+70,L2 Review in progress,InReview,Warning
+80,For Developer action after L2,Open,Error
+90,L2 review completed,Closed,Success
+100,Code changed after L2 review,Open,Error

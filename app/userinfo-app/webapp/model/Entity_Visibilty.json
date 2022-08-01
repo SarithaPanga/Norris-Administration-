@@ -1,0 +1,15 @@
+{
+    "UserInfo": true,
+    "UserAccess": false,
+    "Section" : false,
+    "StatusCode" : false,
+    "Systems" : false,
+    "Phases" : false,
+    "Company" : false,
+    "Issue" : false,
+    "Category" : false,
+    "Admin" : false,
+    "Qus_Head" : false,
+    "Qus_Map" : false,
+    "QnType_Priority" : false
+}
